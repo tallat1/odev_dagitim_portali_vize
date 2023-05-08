@@ -1,0 +1,265 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DB03Model1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Ders">
+          <Key>
+            <PropertyRef Name="dersId" />
+          </Key>
+          <Property Name="dersId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="dersKodu" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="dersAdi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DersKredi" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kayit">
+          <Key>
+            <PropertyRef Name="kayitId" />
+          </Key>
+          <Property Name="kayitId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="kayitOdevId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="kayitOgrId" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Odev">
+          <Key>
+            <PropertyRef Name="odevId" />
+          </Key>
+          <Property Name="odevId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="odevAdi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="odevDersId" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ogrenci">
+          <Key>
+            <PropertyRef Name="ogrId" />
+          </Key>
+          <Property Name="ogrId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ogrNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ogrAdsoyad" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ogrDogTarih" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ogrFoto" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Kayit_ToOdev">
+          <End Role="Odev" Type="Self.Odev" Multiplicity="1" />
+          <End Role="Kayit" Type="Self.Kayit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Odev">
+              <PropertyRef Name="odevId" />
+            </Principal>
+            <Dependent Role="Kayit">
+              <PropertyRef Name="kayitOdevId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kayit_ToOgrenci">
+          <End Role="Ogrenci" Type="Self.Ogrenci" Multiplicity="1" />
+          <End Role="Kayit" Type="Self.Kayit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ogrenci">
+              <PropertyRef Name="ogrId" />
+            </Principal>
+            <Dependent Role="Kayit">
+              <PropertyRef Name="kayitOgrId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Odev_ToOdevbyDersId">
+          <End Role="Ders" Type="Self.Ders" Multiplicity="1" />
+          <End Role="Odev" Type="Self.Odev" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ders">
+              <PropertyRef Name="dersId" />
+            </Principal>
+            <Dependent Role="Odev">
+              <PropertyRef Name="odevDersId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB03Model1StoreContainer">
+          <EntitySet Name="Ders" EntityType="Self.Ders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kayit" EntityType="Self.Kayit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Odev" EntityType="Self.Odev" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ogrenci" EntityType="Self.Ogrenci" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Kayit_ToOdev" Association="Self.FK_Kayit_ToOdev">
+            <End Role="Odev" EntitySet="Odev" />
+            <End Role="Kayit" EntitySet="Kayit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kayit_ToOgrenci" Association="Self.FK_Kayit_ToOgrenci">
+            <End Role="Ogrenci" EntitySet="Ogrenci" />
+            <End Role="Kayit" EntitySet="Kayit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Odev_ToOdevbyDersId" Association="Self.FK_Odev_ToOdevbyDersId">
+            <End Role="Ders" EntitySet="Ders" />
+            <End Role="Odev" EntitySet="Odev" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DB03Model1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Ders">
+          <Key>
+            <PropertyRef Name="dersId" />
+          </Key>
+          <Property Name="dersId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="dersKodu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="dersAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DersKredi" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Odev" Relationship="Self.FK_Odev_ToOdevbyDersId" FromRole="Ders" ToRole="Odev" />
+        </EntityType>
+        <EntityType Name="Kayit">
+          <Key>
+            <PropertyRef Name="kayitId" />
+          </Key>
+          <Property Name="kayitId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="kayitOdevId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="kayitOgrId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Odev" Relationship="Self.FK_Kayit_ToOdev" FromRole="Kayit" ToRole="Odev" />
+          <NavigationProperty Name="Ogrenci" Relationship="Self.FK_Kayit_ToOgrenci" FromRole="Kayit" ToRole="Ogrenci" />
+        </EntityType>
+        <EntityType Name="Odev">
+          <Key>
+            <PropertyRef Name="odevId" />
+          </Key>
+          <Property Name="odevId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="odevAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="odevDersId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Ders" Relationship="Self.FK_Odev_ToOdevbyDersId" FromRole="Odev" ToRole="Ders" />
+          <NavigationProperty Name="Kayit" Relationship="Self.FK_Kayit_ToOdev" FromRole="Odev" ToRole="Kayit" />
+        </EntityType>
+        <EntityType Name="Ogrenci">
+          <Key>
+            <PropertyRef Name="ogrId" />
+          </Key>
+          <Property Name="ogrId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ogrNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ogrAdsoyad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ogrDogTarih" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ogrFoto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Kayit" Relationship="Self.FK_Kayit_ToOgrenci" FromRole="Ogrenci" ToRole="Kayit" />
+        </EntityType>
+        <Association Name="FK_Odev_ToOdevbyDersId">
+          <End Role="Ders" Type="Self.Ders" Multiplicity="1" />
+          <End Role="Odev" Type="Self.Odev" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ders">
+              <PropertyRef Name="dersId" />
+            </Principal>
+            <Dependent Role="Odev">
+              <PropertyRef Name="odevDersId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kayit_ToOdev">
+          <End Role="Odev" Type="Self.Odev" Multiplicity="1" />
+          <End Role="Kayit" Type="Self.Kayit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Odev">
+              <PropertyRef Name="odevId" />
+            </Principal>
+            <Dependent Role="Kayit">
+              <PropertyRef Name="kayitOdevId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kayit_ToOgrenci">
+          <End Role="Ogrenci" Type="Self.Ogrenci" Multiplicity="1" />
+          <End Role="Kayit" Type="Self.Kayit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ogrenci">
+              <PropertyRef Name="ogrId" />
+            </Principal>
+            <Dependent Role="Kayit">
+              <PropertyRef Name="kayitOgrId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB03Entities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Ders" EntityType="Self.Ders" />
+          <EntitySet Name="Kayit" EntityType="Self.Kayit" />
+          <EntitySet Name="Odev" EntityType="Self.Odev" />
+          <EntitySet Name="Ogrenci" EntityType="Self.Ogrenci" />
+          <AssociationSet Name="FK_Odev_ToOdevbyDersId" Association="Self.FK_Odev_ToOdevbyDersId">
+            <End Role="Ders" EntitySet="Ders" />
+            <End Role="Odev" EntitySet="Odev" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kayit_ToOdev" Association="Self.FK_Kayit_ToOdev">
+            <End Role="Odev" EntitySet="Odev" />
+            <End Role="Kayit" EntitySet="Kayit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kayit_ToOgrenci" Association="Self.FK_Kayit_ToOgrenci">
+            <End Role="Ogrenci" EntitySet="Ogrenci" />
+            <End Role="Kayit" EntitySet="Kayit" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DB03Model1StoreContainer" CdmEntityContainer="DB03Entities1">
+          <EntitySetMapping Name="Ders">
+            <EntityTypeMapping TypeName="DB03Model1.Ders">
+              <MappingFragment StoreEntitySet="Ders">
+                <ScalarProperty Name="dersId" ColumnName="dersId" />
+                <ScalarProperty Name="dersKodu" ColumnName="dersKodu" />
+                <ScalarProperty Name="dersAdi" ColumnName="dersAdi" />
+                <ScalarProperty Name="DersKredi" ColumnName="DersKredi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kayit">
+            <EntityTypeMapping TypeName="DB03Model1.Kayit">
+              <MappingFragment StoreEntitySet="Kayit">
+                <ScalarProperty Name="kayitId" ColumnName="kayitId" />
+                <ScalarProperty Name="kayitOdevId" ColumnName="kayitOdevId" />
+                <ScalarProperty Name="kayitOgrId" ColumnName="kayitOgrId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Odev">
+            <EntityTypeMapping TypeName="DB03Model1.Odev">
+              <MappingFragment StoreEntitySet="Odev">
+                <ScalarProperty Name="odevId" ColumnName="odevId" />
+                <ScalarProperty Name="odevAdi" ColumnName="odevAdi" />
+                <ScalarProperty Name="odevDersId" ColumnName="odevDersId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ogrenci">
+            <EntityTypeMapping TypeName="DB03Model1.Ogrenci">
+              <MappingFragment StoreEntitySet="Ogrenci">
+                <ScalarProperty Name="ogrId" ColumnName="ogrId" />
+                <ScalarProperty Name="ogrNo" ColumnName="ogrNo" />
+                <ScalarProperty Name="ogrAdsoyad" ColumnName="ogrAdsoyad" />
+                <ScalarProperty Name="ogrDogTarih" ColumnName="ogrDogTarih" />
+                <ScalarProperty Name="ogrFoto" ColumnName="ogrFoto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
