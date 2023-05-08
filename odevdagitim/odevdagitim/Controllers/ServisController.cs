@@ -100,7 +100,7 @@ namespace odevdagitim.Controllers
                 return sonuc;
             }
 
-            if (db.Kayit.Count(c => c.kayitOgrId == ogretmenId) > 0)
+            if (db.Kayit.Count(c => c.kayitOgretmenId == ogretmenId) > 0)
             {
                 sonuc.islem = false;
                 sonuc.mesaj = "Ödev Veren Öğretmen Silinemez!";
