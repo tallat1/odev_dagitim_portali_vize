@@ -4,4 +4,6 @@
  
  -Ödev Dağıtım Portalı Diagram Gösterimi 
  
+ -Projemizin amacı bir ödev dağıtım portlalı yapmak. Bu projede öğretmenler öğrencilerine ödev verebilicek ve derser göre ödeve ekleyebilecekler.
+ 
 ![diagram_new](https://user-images.githubusercontent.com/59206343/236830895-755c762a-be5d-4e52-a00f-a190d777446e.png)
